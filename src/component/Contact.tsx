@@ -1,7 +1,29 @@
 import { motion } from "framer-motion";
 import { FaWhatsapp, FaEnvelope, FaPaperPlane } from "react-icons/fa";
+import { useForm } from "react-hook-form"
+import { yupResolver } from "@hookform/resolvers/yup"
+import * as yup from "yup"
+
+const schema = yup
+  .object({
+    name: yup.string().required("veuillez saisir votre nom"),
+    email: yup.string().required("veuillez saisir votre email"),
+    message: yup.string().required("veuillez saisir votre message"),
+
+  })
+  .required()
 
 const Contact = () => {
+    const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm({
+    resolver: yupResolver(schema),
+  })
+  const onSubmit = (data) => {
+    console.log(data)
+  }
   return (
     <section id="contact" className="relative py-28 bg-[#020617] text-white px-6 overflow-hidden">
 
@@ -54,7 +76,7 @@ const Contact = () => {
 
                 <div className="flex items-center gap-3">
                   <FaEnvelope className="text-green-400" />
-                  <span>jiradainkana9@gmail.com</span>
+                  <span>jiradainkana9@mail.com</span>
                 </div>
 
                 <div className="flex items-center gap-3">
@@ -81,6 +103,7 @@ const Contact = () => {
 
           {/* RIGHT FORM */}
           <motion.form
+          onSubmit={handleSubmit(onSubmit)}
             initial={{ opacity: 0, x: 30 }}
             whileInView={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.6 }}
@@ -91,9 +114,11 @@ const Contact = () => {
             {/* NAME */}
             <input
               type="text"
+              {...register("name")}
               placeholder="Votre nom"
               className="w-full px-4 py-3 bg-[#020617] border border-white/10 rounded-xl focus:border-green-500 outline-none text-white"
             />
+            <p>{errors.name?.message}</p>
 
             {/* EMAIL */}
             <input
@@ -101,6 +126,7 @@ const Contact = () => {
               placeholder="Votre email"
               className="w-full px-4 py-3 bg-[#020617] border border-white/10 rounded-xl focus:border-green-500 outline-none text-white"
             />
+            <p>{errors.email?.message}</p>
 
             {/* MESSAGE */}
             <textarea
@@ -108,7 +134,7 @@ const Contact = () => {
               placeholder="Votre message..."
               className="w-full px-4 py-3 bg-[#020617] border border-white/10 rounded-xl focus:border-green-500 outline-none text-white resize-none"
             />
-
+            <p>{errors.message?.message}</p>
             {/* BUTTON */}
             <button
               type="submit"
