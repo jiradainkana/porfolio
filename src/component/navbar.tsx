@@ -21,6 +21,13 @@ const Navbar = () => {
         {/* DESKTOP MENU */}
         <ul className="hidden md:flex gap-8 text-gray-300 font-medium">
 
+             <li>
+            <a href="#hero" className="relative hover:text-green-400 transition">
+              Accueil
+              <span className="absolute left-0 -bottom-1 w-0 h-[2px] bg-green-500 transition-all duration-300 hover:w-full"></span>
+            </a>
+          </li>
+
           <li>
             <a href="#about" className="relative hover:text-green-400 transition">
               A propos
@@ -74,14 +81,12 @@ const Navbar = () => {
         <div className="md:hidden absolute top-full left-0 w-full bg-[#020617] border-t border-green-500/20 px-6 py-6">
 
           <ul className="flex flex-col gap-6 text-gray-300 font-medium">
-
+            <li><a href="#hero" onClick={() => setOpen(false)} className="hover:text-green-400">Accueil</a></li>
             <li><a href="#about" onClick={() => setOpen(false)} className="hover:text-green-400">A propos</a></li>
             <li><a href="#services" onClick={() => setOpen(false)} className="hover:text-green-400">Services</a></li>
             <li><a href="#projects" onClick={() => setOpen(false)} className="hover:text-green-400">Mes réalisations</a></li>
             <li><a href="#contact" onClick={() => setOpen(false)} className="hover:text-green-400">Contact</a></li>
-
           </ul>
-
           <a
             href="#contact"
             onClick={() => setOpen(false)}
